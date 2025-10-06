@@ -1,0 +1,356 @@
+
+// Hero Carousel
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+
+    &.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(60, 47, 47, 0.7) 0%, rgba(212, 175, 55, 0.3) 100%);
+    }
+
+    .carousel-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      color: var(--color-branco-perola);
+
+      h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: var(--color-branco-perola);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: var(--color-champagne);
+      }
+    }
+  }
+
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(212, 175, 55, 0.8);
+    }
+
+    &.prev {
+      left: 2rem;
+    }
+
+    &.next {
+      right: 2rem;
+    }
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 0.75rem;
+
+    button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid white;
+      background-color: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.active {
+        background-color: var(--color-dourado-metalico);
+        border-color: var(--color-dourado-metalico);
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+// Products Section
+.products-section {
+  padding: 5rem 0;
+  background-color: var(--color-branco-perola);
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-contraste-escuro);
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--color-texto-secundario);
+    }
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    overflow: hidden;
+
+    .product-image {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &:hover .product-image img {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+
+      .product-name {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-contraste-escuro);
+      }
+
+      .product-description {
+        font-size: 1rem;
+        color: var(--color-texto-secundario);
+        margin-bottom: 1rem;
+      }
+
+      .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .product-price {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--color-dourado-metalico);
+        }
+      }
+    }
+  }
+}
+
+// About Section
+.about-section {
+  padding: 5rem 0;
+
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--color-contraste-escuro);
+    }
+
+    p {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      color: var(--color-texto-secundario);
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .hero-carousel {
+    height: 400px;
+
+    .carousel-slide .carousel-content {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        font-size: 1.125rem;
+      }
+    }
+
+    .carousel-control {
+      padding: 0.75rem;
+
+      &.prev {
+        left: 1rem;
+      }
+
+      &.next {
+        right: 1rem;
+      }
+    }
+  }
+
+  .products-section {
+    padding: 3rem 0;
+
+    .section-header h2 {
+      font-size: 2rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  .about-section {
+    padding: 3rem 0;
+
+    .about-content h2 {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-carousel {
+    height: 300px;
+
+    .carousel-slide .carousel-content {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+// Toast Notification
+.toast-notification {
+  position: fixed;
+  top: 100px;
+  right: 2rem;
+  z-index: 1000;
+  animation: slideInRight 0.3s ease;
+
+  .toast-content {
+    background-color: var(--color-dourado-metalico);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .toast-icon {
+      font-size: 1.5rem;
+      background-color: white;
+      color: var(--color-dourado-metalico);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .toast-message {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .toast-notification {
+    right: 1rem;
+    left: 1rem;
+
+    .toast-content {
+      padding: 0.875rem 1.25rem;
+
+      .toast-message {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

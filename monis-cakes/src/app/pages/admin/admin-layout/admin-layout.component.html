@@ -1,0 +1,113 @@
+<div class="admin-layout">
+  <!-- Admin Navbar -->
+  <nav class="admin-navbar">
+    <div class="admin-nav-content">
+      <div class="admin-logo">
+        <h2 class="font-serif">Painel Administrativo</h2>
+      </div>
+      
+      <div class="admin-nav-actions">
+        <!-- Orders Cart Icon with Badge -->
+        <button class="orders-cart-btn" (click)="toggleOrdersPanel()" title="Pedidos">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="badge" *ngIf="totalOrders > 0">{{ totalOrders }}</span>
+        </button>
+        
+        <button class="btn btn-secondary" (click)="logout()">Sair</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Orders Panel (Dropdown) -->
+  <div class="orders-panel" *ngIf="showOrdersPanel">
+    <div class="orders-panel-content">
+      <h3 class="font-serif">Estatísticas de Pedidos</h3>
+      
+      <!-- Mensagem quando não há pedidos -->
+      <div class="no-orders-message" *ngIf="totalOrders === 0">
+        <div class="no-orders-icon">📦</div>
+        <p>Você ainda não tem nenhum pedido</p>
+      </div>
+
+      <!-- Estatísticas quando há pedidos -->
+      <div class="stats-grid" *ngIf="totalOrders > 0">
+        <div class="stat-card">
+          <div class="stat-icon total">📦</div>
+          <div class="stat-info">
+            <p class="stat-label">Total de Pedidos</p>
+            <p class="stat-value">{{ totalOrders }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon completed">✅</div>
+          <div class="stat-info">
+            <p class="stat-label">Pedidos Atendidos</p>
+            <p class="stat-value">{{ completedOrders }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon pending">⏳</div>
+          <div class="stat-info">
+            <p class="stat-label">Pedidos Pendentes</p>
+            <p class="stat-value">{{ pendingOrders }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon processing">🔄</div>
+          <div class="stat-info">
+            <p class="stat-label">Em Produção</p>
+            <p class="stat-value">{{ processingOrders }}</p>
+          </div>
+        </div>
+        
+        <div class="stat-card revenue">
+          <div class="stat-icon">💰</div>
+          <div class="stat-info">
+            <p class="stat-label">Receita Total</p>
+            <p class="stat-value">R$ {{ totalRevenue.toFixed(2) }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="panel-actions" *ngIf="totalOrders > 0">
+        <button class="btn btn-primary" routerLink="/admin/pedidos" (click)="toggleOrdersPanel()">
+          Ver Todos os Pedidos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar">
+    <nav class="admin-menu">
+      <a routerLink="/admin/produtos" routerLinkActive="active" class="menu-item">
+        <span class="menu-icon">📦</span>
+        <span>Produtos</span>
+      </a>
+      <a routerLink="/admin/pedidos" routerLinkActive="active" class="menu-item">
+        <span class="menu-icon">🛒</span>
+        <span>Pedidos</span>
+      </a>
+      <a routerLink="/admin/usuarios" routerLinkActive="active" class="menu-item">
+        <span class="menu-icon">👥</span>
+        <span>Usuários</span>
+      </a>
+      <a routerLink="/" class="menu-item">
+        <span class="menu-icon">🏠</span>
+        <span>Voltar ao Site</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Admin Content -->
+  <main class="admin-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

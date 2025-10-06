@@ -1,0 +1,50 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-content">
+      <!-- Logo -->
+      <a routerLink="/" class="navbar-logo">
+        <span class="logo-script">Moni's</span>
+        <span class="logo-serif">Cakes</span>
+      </a>
+
+      <!-- Menu Desktop -->
+      <ul class="navbar-menu">
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/dashboard" routerLinkActive="active">Minha Conta</a></li>
+        <li *ngIf="isLoggedIn && isAdmin"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+      </ul>
+
+      <!-- Carrinho e Logout -->
+      <div class="navbar-actions">
+        <a routerLink="/carrinho" class="cart-icon" title="Carrinho">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+        </a>
+        <button *ngIf="isLoggedIn" (click)="logout()" class="btn-logout">Sair</button>
+      </div>
+
+      <!-- Menu Mobile Toggle -->
+      <button class="mobile-toggle" (click)="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" [class.active]="mobileMenuOpen">
+      <ul>
+        <li><a routerLink="/" (click)="closeMobileMenu()">Home</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/dashboard" (click)="closeMobileMenu()">Minha Conta</a></li>
+        <li *ngIf="isLoggedIn && isAdmin"><a routerLink="/admin" (click)="closeMobileMenu()">Admin</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login" (click)="closeMobileMenu()">Login</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="logout()">Sair</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

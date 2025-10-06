@@ -1,0 +1,160 @@
+<div class="login-page">
+  <div class="container">
+    <div class="login-card card">
+      <div class="login-header">
+        <h1 class="font-serif">{{ isLoginMode ? 'Entrar' : 'Criar Conta' }}</h1>
+        <p>{{ isLoginMode ? 'Acesse sua conta' : 'Cadastre-se para fazer pedidos' }}</p>
+      </div>
+
+      <!-- Erro Mensagem -->
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Login Form -->
+      <form *ngIf="isLoginMode" (ngSubmit)="onLogin()" class="login-form">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            [(ngModel)]="loginEmail" 
+            name="loginEmail"
+            placeholder="seu@email.com"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            [(ngModel)]="loginPassword" 
+            name="loginPassword"
+            placeholder="••••••••"
+            required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+
+        <p class="toggle-text">
+          Não tem uma conta? 
+          <a (click)="toggleMode()">Cadastre-se</a>
+        </p>
+
+        <p class="forgot-password-link">
+          <a (click)="toggleForgotPassword()">Esqueci minha senha</a>
+        </p>
+      </form>
+
+      <!-- Register Form -->
+      <form *ngIf="!isLoginMode" (ngSubmit)="onRegister()" class="login-form">
+        <div class="form-group">
+          <label for="registerName">Nome Completo</label>
+          <input 
+            type="text" 
+            id="registerName" 
+            [(ngModel)]="registerName" 
+            name="registerName"
+            placeholder="Seu nome"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input 
+            type="email" 
+            id="registerEmail" 
+            [(ngModel)]="registerEmail" 
+            name="registerEmail"
+            placeholder="seu@email.com"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerPassword">Senha</label>
+          <input 
+            type="password" 
+            id="registerPassword" 
+            [(ngModel)]="registerPassword" 
+            name="registerPassword"
+            placeholder="Mínimo 6 caracteres"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label for="registerConfirmPassword">Confirmar Senha</label>
+          <input 
+            type="password" 
+            id="registerConfirmPassword" 
+            [(ngModel)]="registerConfirmPassword" 
+            name="registerConfirmPassword"
+            placeholder="Digite a senha novamente"
+            required>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input 
+              type="checkbox" 
+              [(ngModel)]="acceptTerms" 
+              name="acceptTerms"
+              required>
+            <span>
+              Aceito os 
+              <a routerLink="/termos" target="_blank">Termos de Uso e Política de Privacidade</a>
+            </span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Criar Conta</button>
+
+        <p class="toggle-mode">
+          Já tem uma conta? 
+          <a (click)="toggleMode()">Entrar</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="modal-overlay" *ngIf="showForgotPassword" (click)="toggleForgotPassword()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="font-serif">Recuperar Senha</h2>
+      <button class="close-btn" (click)="toggleForgotPassword()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-description">
+        Digite seu email cadastrado e enviaremos um link para redefinir sua senha.
+      </p>
+
+      <form (ngSubmit)="sendPasswordReset()">
+        <div class="form-group">
+          <label for="forgotEmail">Email</label>
+          <input 
+            type="email" 
+            id="forgotEmail"
+            [(ngModel)]="forgotPasswordEmail"
+            name="forgotPasswordEmail"
+            placeholder="Digite seu email"
+            required>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <div class="alert alert-success" *ngIf="successMessage">
+          {{ successMessage }}
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Enviar Link de Recuperação
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

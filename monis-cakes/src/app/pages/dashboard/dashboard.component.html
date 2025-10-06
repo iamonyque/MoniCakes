@@ -1,0 +1,100 @@
+<div class="dashboard-page">
+  <div class="container">
+    <div class="dashboard-header">
+      <h1 class="font-serif">Meus Pedidos</h1>
+      <p>Bem-vindo(a), {{ authService.currentUserValue?.name }}!</p>
+    </div>
+
+    <div class="orders-section" *ngIf="userOrders.length > 0; else noOrders">
+      <div class="orders-list">
+        <div *ngFor="let order of userOrders" class="order-card card">
+          <div class="order-header">
+            <div class="order-id">
+              <span class="label">Pedido #{{ order.id }}</span>
+              <span class="date">{{ order.createdAt | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <span class="order-status" [ngClass]="getStatusClass(order.status)">
+              {{ getStatusLabel(order.status) }}
+            </span>
+          </div>
+
+          <div class="order-summary">
+            <div class="order-items">
+              <p><strong>{{ order.items.length }}</strong> {{ order.items.length === 1 ? 'item' : 'itens' }}</p>
+            </div>
+            <div class="order-total">
+              <p class="total-label">Total:</p>
+              <p class="total-value">R$ {{ order.total.toFixed(2) }}</p>
+            </div>
+          </div>
+
+          <div class="order-actions">
+            <button class="btn btn-secondary" (click)="viewOrderDetails(order)">
+              Ver Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noOrders>
+      <div class="no-orders">
+        <div class="no-orders-icon">📦</div>
+        <h2>Você ainda não fez nenhum pedido</h2>
+        <p>Explore nossa coleção e faça seu primeiro pedido!</p>
+        <a routerLink="/" class="btn btn-primary">Ver Produtos</a>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Order Details Modal -->
+<div class="modal-overlay" *ngIf="selectedOrder" (click)="closeOrderDetails()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="font-serif">Detalhes do Pedido #{{ selectedOrder.id }}</h2>
+      <button class="close-btn" (click)="closeOrderDetails()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="order-info">
+        <div class="info-row">
+          <span class="info-label">Data do Pedido:</span>
+          <span class="info-value">{{ selectedOrder.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Status:</span>
+          <span class="order-status" [ngClass]="getStatusClass(selectedOrder.status)">
+            {{ getStatusLabel(selectedOrder.status) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="order-items-detail">
+        <h3>Itens do Pedido</h3>
+        <div *ngFor="let item of selectedOrder.items" class="item-detail">
+          <img [src]="item.image" [alt]="item.name" class="item-image">
+          <div class="item-info">
+            <p class="item-name">{{ item.name }}</p>
+            <p class="item-quantity">Quantidade: {{ item.quantity }}</p>
+          </div>
+          <div class="item-price">
+            <p>R$ {{ item.price.toFixed(2) }}</p>
+            <p class="item-subtotal">Subtotal: R$ {{ (item.price * item.quantity).toFixed(2) }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-total-detail">
+        <div class="total-row">
+          <span class="total-label">Total do Pedido:</span>
+          <span class="total-value">R$ {{ selectedOrder.total.toFixed(2) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="closeOrderDetails()">Fechar</button>
+    </div>
+  </div>
+</div>
