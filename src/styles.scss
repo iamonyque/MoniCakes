@@ -1,0 +1,303 @@
+/* ==========================================
+   Moni's Cakes - Global Styles
+   ========================================== */
+
+/* ==========================================
+   1. Variáveis de Cores
+   ========================================== */
+:root {
+  --color-rosa-dourado: #F5C6CE;
+  --color-dourado-metalico: #D4AF37;
+  --color-champagne: #F7EDE2;
+  --color-branco-perola: #FFFFFF;
+  --color-contraste-escuro: #3C2F2F;
+  
+  /* Cores adicionais para UI */
+  --color-rosa-claro: #FDE8EC;
+  --color-dourado-claro: #F4E5C2;
+  --color-cinza-suave: #F5F5F5;
+  --color-texto-principal: #3C2F2F;
+  --color-texto-secundario: #6B5B5B;
+}
+
+/* ==========================================
+   2. Tipografia
+   ========================================== */
+$font-script: 'Great Vibes', cursive;
+$font-serif: 'Playfair Display', serif;
+$font-sans: 'DM Sans', sans-serif;
+
+/* ==========================================
+   3. Reset e Estilos Base
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-texto-principal);
+  background-color: var(--color-branco-perola);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================
+   4. Tipografia Global
+   ========================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-contraste-escuro);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--color-texto-secundario);
+}
+
+a {
+  color: var(--color-dourado-metalico);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--color-contraste-escuro);
+  }
+}
+
+/* ==========================================
+   5. Classes Utilitárias
+   ========================================== */
+.font-script {
+  font-family: $font-script;
+}
+
+.font-serif {
+  font-family: $font-serif;
+}
+
+.font-sans {
+  font-family: $font-sans;
+}
+
+.text-rosa {
+  color: var(--color-rosa-dourado);
+}
+
+.text-dourado {
+  color: var(--color-dourado-metalico);
+}
+
+.text-escuro {
+  color: var(--color-contraste-escuro);
+}
+
+.bg-rosa {
+  background-color: var(--color-rosa-dourado);
+}
+
+.bg-champagne {
+  background-color: var(--color-champagne);
+}
+
+.bg-branco {
+  background-color: var(--color-branco-perola);
+}
+
+/* ==========================================
+   6. Container e Layout
+   ========================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================
+   7. Botões
+   ========================================== */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-family: $font-sans;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-dourado-metalico);
+  color: var(--color-branco-perola);
+  
+  &:hover {
+    background-color: var(--color-contraste-escuro);
+    color: var(--color-branco-perola);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--color-rosa-dourado);
+  color: var(--color-contraste-escuro);
+  
+  &:hover {
+    background-color: var(--color-contraste-escuro);
+    color: var(--color-branco-perola);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-dourado-metalico);
+  border: 2px solid var(--color-dourado-metalico);
+  
+  &:hover {
+    background-color: var(--color-dourado-metalico);
+    color: var(--color-branco-perola);
+  }
+}
+
+/* ==========================================
+   8. Cards
+   ========================================== */
+.card {
+  background-color: var(--color-branco-perola);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+  }
+}
+
+/* ==========================================
+   9. Animações
+   ========================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* ==========================================
+   10. Responsividade
+   ========================================== */
+@media (max-width: 768px) {
+  html, body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ==========================================
+   11. Scrollbar Personalizada
+   ========================================== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-champagne);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dourado-metalico);
+  border-radius: 5px;
+  
+  &:hover {
+    background: var(--color-contraste-escuro);
+  }
+}

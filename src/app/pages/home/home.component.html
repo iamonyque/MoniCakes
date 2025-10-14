@@ -1,0 +1,84 @@
+<!-- Hero Carousel -->
+<section class="hero-carousel">
+  <div class="carousel-container">
+    <div class="carousel-slides">
+      <div *ngFor="let slide of heroSlides; let i = index" 
+           class="carousel-slide" 
+           [class.active]="i === currentSlide"
+           [style.background-image]="'url(' + slide.image + ')'">
+        <div class="carousel-overlay"></div>
+        <div class="carousel-content container">
+          <h1 class="font-serif">{{ slide.title }}</h1>
+          <p class="subtitle">{{ slide.subtitle }}</p>
+          <button class="btn btn-primary" (click)="scrollToCollection()">{{ slide.cta }}</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Carousel Controls -->
+    <button class="carousel-control prev" (click)="prevSlide()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="carousel-control next" (click)="nextSlide()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button *ngFor="let slide of heroSlides; let i = index" 
+              [class.active]="i === currentSlide"
+              (click)="goToSlide(i)"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Toast Notification -->
+<div class="toast-notification" *ngIf="showAddedToast">
+  <div class="toast-content">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message">{{ addedProductName }} adicionado ao carrinho!</span>
+  </div>
+</div>
+
+<!-- Products Section -->
+<section class="products-section" id="nossa-colecao">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="font-serif">Nossa Coleção</h2>
+      <p class="section-subtitle">Descubra nossos bolos e doces artesanais</p>
+    </div>
+    
+    <div class="products-grid">
+      <div *ngFor="let product of products" class="product-card card">
+        <div class="product-image">
+          <img [src]="product.image" [alt]="product.name">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="product-description">{{ product.description }}</p>
+          <div class="product-footer">
+            <span class="product-price">R$ {{ product.price.toFixed(2) }}</span>
+            <button class="btn btn-secondary" (click)="addToCart(product)">
+              Adicionar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section bg-champagne">
+  <div class="container">
+    <div class="about-content">
+      <h2 class="font-serif">Sobre Moni's Cakes</h2>
+      <p>Na Moni's Cakes, cada bolo é uma obra de arte cuidadosamente elaborada com ingredientes premium e muito amor. Nossa paixão pela confeitaria de luxo se reflete em cada detalhe, desde a seleção dos melhores ingredientes até a apresentação final.</p>
+      <p>Especializados em bolos artesanais, macarons franceses e doces finos, oferecemos criações únicas que transformam momentos especiais em memórias inesquecíveis.</p>
+    </div>
+  </div>
+</section>
